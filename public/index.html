@@ -11,5 +11,16 @@
     <h1>AWS Secrets Manager emulator</h1>
 
     <p><a href="https://aws.amazon.com/secrets-manager/" target="_blank">Documentation of Secrets Manager</a></p>
+
+    <h1>Add a secret</h1>
+    <form method="post" action="/management/add">
+        <p>Name</p>
+        <input name="name" type="text" />
+
+        <p>Content</p>
+        <textarea name="content">{"key":"value"}</textarea>
+
+        <input type="submit" value="save">
+    </form>
 </body>
 </html>

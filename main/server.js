@@ -46,6 +46,11 @@ async function go(config) {
   await server.register(require('main/plugin/views'));
 
   /**
+   * Management stuff
+   */
+  await server.register(require('main/plugin/management'));
+
+  /**
    * Start and return
    */
   await server.start();
