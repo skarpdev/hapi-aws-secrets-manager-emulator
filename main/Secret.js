@@ -27,6 +27,10 @@ class Secret {
             content: this.content
         }
     }
+
+    getLookupKey() {
+        return this.name;
+    }
 }
 
 module.exports = Secret;

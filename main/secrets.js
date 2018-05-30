@@ -1,25 +1,34 @@
 /**
- * @type {Secret}
+ * @type {Object.<string, Secret>}
  */
-const secrets = [];
+const secrets = {};
 
 /**
  * Save a secret
  * @param {Secret} secret 
  */
 module.exports.save = function save(secret) {
-    secrets.push(secret);
+    const key = secret.getLookupKey();
+
+    secrets[key] = secret;
+};
+
+/**
+ * @returns {Secret[]}
+ */
+module.exports.getAll = function getAll() {
+    const all = [];
 
     for (let i in secrets) {
-        console.log(secrets[i].getName(), ' = ', secrets[i].getContent());
+        all.push(secrets[i]);
     }
+
+    return all;
 };
 
-
-module.exports.getAll = function getAll() {
-    return secrets;
-};
-
+/**
+ * @returns {Object[]}
+ */
 module.exports.getAllAsAnonymous = function getAllAsAnonymous() {
     const all = [];
 
