@@ -12,7 +12,7 @@
 
     <p><a href="https://aws.amazon.com/secrets-manager/" target="_blank">Documentation of Secrets Manager</a></p>
 
-    <h1>Add a secret</h1>
+    <h2>Add a secret</h2>
     <form method="post" action="/management/add">
         <p>Name</p>
         <input name="name" type="text" />
@@ -22,5 +22,25 @@
 
         <input type="submit" value="save">
     </form>
+
+    <h2>Secrets</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+        <tbody>
+            {{#allSecrets}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{content}}</td>
+                </tr>
+            {{/allSecrets}}
+        </tbody>
+    </table>
 </body>
 </html>

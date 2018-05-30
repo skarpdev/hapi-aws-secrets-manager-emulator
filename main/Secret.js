@@ -20,6 +20,13 @@ class Secret {
     setName(value) {
         this.name = value;
     }
+
+    asAnonymous() {
+        return {
+            name: this.name,
+            content: this.content
+        }
+    }
 }
 
 module.exports = Secret;

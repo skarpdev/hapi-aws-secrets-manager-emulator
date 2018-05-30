@@ -1,5 +1,6 @@
 const Mustache = require('mustache');
 const path = require('path');
+const secrets = require('main/secrets');
 
 /**
  *
@@ -37,6 +38,7 @@ const register = async (server) => {
     handler: async (req, h) => {
 
       return h.view('index', {
+          allSecrets: secrets.getAllAsAnonymous()
       });
     }
   });
