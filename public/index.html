@@ -29,6 +29,7 @@
             <tr>
                 <th>Name</th>
                 <th>Content</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tfoot>
@@ -38,6 +39,7 @@
                 <tr>
                     <td>{{name}}</td>
                     <td>{{content}}</td>
+                    <td><a href="/management/delete?key={{key}}">delete</a></td>
                 </tr>
             {{/allSecrets}}
         </tbody>

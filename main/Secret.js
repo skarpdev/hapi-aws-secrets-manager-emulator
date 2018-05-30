@@ -24,10 +24,15 @@ class Secret {
     asAnonymous() {
         return {
             name: this.name,
-            content: this.content
+            content: this.content,
+            key: this.getLookupKey()
         }
     }
 
+    /**
+     * This should be URL safe
+     * @returns {string}
+     */
     getLookupKey() {
         return this.name;
     }
