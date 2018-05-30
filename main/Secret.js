@@ -34,7 +34,11 @@ class Secret {
      * @returns {string}
      */
     getLookupKey() {
-        return this.name;
+        // just url encoding string is annoying
+        // as we then have to take into account that Hapi
+        // does url decoding when we receive it back, so
+        // base64 seems like an easy win
+        return new Buffer(this.name).toString('base64');
     }
 }
 
