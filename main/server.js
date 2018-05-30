@@ -50,6 +50,11 @@ async function go(config) {
    */
   await server.register(require('main/plugin/management'));
 
+    /**
+     * AWS stuff
+     */
+    await server.register(require('main/plugin/aws'));
+
   /**
    * Start and return
    */

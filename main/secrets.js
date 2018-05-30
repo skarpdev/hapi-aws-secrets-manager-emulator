@@ -26,6 +26,22 @@ module.exports.delete = function deleteFn(key) {
 
 
 /**
+ * Get a secret by name
+ * @param name {string} The name of the secret to get
+ * @returns {Secret|null}
+ */
+module.exports.getByName = function getByName(name) {
+    for (let key in secrets) {
+        if (secrets[key].getName() === name) {
+            return secrets[key];
+        }
+    }
+
+    return null;
+};
+
+
+/**
  * @returns {Secret[]}
  */
 module.exports.getAll = function getAll() {
