@@ -1,0 +1,13 @@
+.git
+.gitignore
+.gitlab-ci.yml
+README.md
+docker-compose.yml
+node_modules
+*.md
+Dockerfile*
+.idea
+.vs
+.dockerignore
+*.log
+example-secrets

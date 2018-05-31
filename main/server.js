@@ -9,7 +9,7 @@ const Path = require('path');
  */
 async function go(config) {
   const server = new Hapi.Server({
-    port: config.PORT || 3000,
+    port: config.PORT,
     routes: {
         files: {
             relativeTo: Path.join(__dirname, '..', 'public')

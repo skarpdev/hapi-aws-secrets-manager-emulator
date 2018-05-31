@@ -1,7 +1,10 @@
 require('make-promises-safe');
 const serverGo = require('./server');
+const preloadSecrets = require('./preload-secrets');
 const config = require('./config');
 let server;
+
+preloadSecrets(config);
 
 serverGo(config)
   .then(srv => {
