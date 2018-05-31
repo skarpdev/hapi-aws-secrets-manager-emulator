@@ -21,11 +21,19 @@ Other features:
 
 Configuration is done through environment variables.
 
-- `SECRETS_MANAGER_PORT` the port to run on - default is 3000
-- `SECRETS_MANAGER_PRELOAD_DIRECTORY` absolute path of directory from which to read initial set of secrets (see below) - default is empty
+- `SECRETS_MANAGER_PORT` the port to run on - **default is 3000**
+- `SECRETS_MANAGER_PRELOAD_DIRECTORY` absolute path of directory from which to read initial set of secrets (see below) - **default is empty**
+- `SECRETS_MANAGER_SECRETS` secrets to preload if you are unable to use volume mounts - **default is empty**
 
 
 ## Preloading secrets
+
+Preloading secrets can be done either via files or by passing a JSON string through an environment variable.
+
+If you define the same SecretId as both a file and in environment - **the version from env will win**.
+
+
+### Via files
 
 As secrets are really just JSON blobs, we thought it would be easiest just to say that 1 file becomes 1 secret.
 
@@ -38,3 +46,60 @@ In [example-secrets](./example-secrets) you can see, well, an example of this.
 `hierarchy.two` becomes a secret with `SecretId = hierarchy/two`.
 
 You tell the emulator to preload secrets from a directory by assigning an **absolute path** to the environment variable `SECRETS_MANAGER_PRELOAD_DIRECTORY`.
+
+
+### Via environment variable
+
+You can provide a set of initial secrets by setting the environment variable `SECRETS_MANAGER_SECRETS` to a JSON string.
+
+The pretty-printed object would look like this:
+
+```json
+{
+    "from/env": "{\"key\":\"value\"}",
+    "kewl": "{\"kinda\":\"ew\"}"
+}
+```
+
+It is basically a dictionary with a **string key** and a **string value**. The key becomes the SecretId and the value becomes the content.
+
+In Bash the above would look like this:
+
+```bash
+SET SECRETS_MANAGER_SECRETS='{"from/env":"{\"key\": \"value\"}","kewl":"{\"kinda\":\"ew\"}"}'
+```
+
+## Usage
+
+### docker-compose.yml
+
+```yaml
+version: '3'
+
+services:
+  secretsmanager:
+    image: skarpdev/aws-secrets-manager-emulator:0.1.0 ## remember to update the version
+    volumes:
+      - ./secrets-manager-secrets:/secrets ## preload secrets via files
+    ports:
+      - 3000:3000
+```
+
+
+### .gitlab-ci.yml
+
+```yaml
+stages:
+  - test
+
+test-integration:
+  stage: test
+  image: $CONTAINER_TEST_IMAGE
+  variables:
+    SECRETS_MANAGER_SECRETS: '{"from/env":"{\"key\": \"value\"}","kewl":"{\"kinda\":\"ew\"}"}'
+  services:
+    - name: skarpdev/aws-secrets-manager-emulator:0.1.0
+      alias: secretsmanager
+  script:
+    - do your thing
+```

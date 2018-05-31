@@ -12,11 +12,7 @@ function addFileToSecrets(dir, filename) {
 }
 
 
-/**
- * Pre-loads secrets defined in a given directory
- * @param {object} config Configuration object
- */
-module.exports = function preloadSecrets(config) {
+function fromFiles(config) {
     const preloadDir = config.PRELOAD_DIRECTORY;
 
     if (preloadDir === '') {
@@ -34,4 +30,28 @@ module.exports = function preloadSecrets(config) {
     for (let i in files) {
         addFileToSecrets(preloadDir, files[i]);
     }
+}
+
+
+function fromEnvironment() {
+    const env = process.env['SECRETS_MANAGER_SECRETS'] || null;
+
+    if (env !== null) {
+        const parsed = JSON.parse(env);
+
+        for (let name in parsed) {
+            secrets.save(new Secret(name, parsed[name]));
+        }
+    }
+}
+
+
+
+/**
+ * Pre-loads secrets defined in a given directory
+ * @param {object} config Configuration object
+ */
+module.exports = function preloadSecrets(config) {
+    fromFiles(config);
+    fromEnvironment();
 };
