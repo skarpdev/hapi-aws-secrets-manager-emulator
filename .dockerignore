@@ -10,3 +10,4 @@ Dockerfile*
 .vs
 .dockerignore
 *.log
+example-secrets
