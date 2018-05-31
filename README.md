@@ -68,3 +68,38 @@ In Bash the above would look like this:
 ```bash
 SET SECRETS_MANAGER_SECRETS='{"from/env":"{\"key\": \"value\"}","kewl":"{\"kinda\":\"ew\"}"}'
 ```
+
+## Usage
+
+### docker-compose.yml
+
+```yaml
+version: '3'
+
+services:
+  secretsmanager:
+    image: skarpdev/aws-secrets-manager-emulator:0.1.0 ## remember to update the version
+    volumes:
+      - ./secrets-manager-secrets:/secrets ## preload secrets via files
+    ports:
+      - 3000:3000
+```
+
+
+### .gitlab-ci.yml
+
+```yaml
+stages:
+  - test
+
+test-integration:
+  stage: test
+  image: $CONTAINER_TEST_IMAGE
+  variables:
+    SECRETS_MANAGER_SECRETS: '{"from/env":"{\"key\": \"value\"}","kewl":"{\"kinda\":\"ew\"}"}'
+  services:
+    - name: skarpdev/aws-secrets-manager-emulator:0.1.0
+      alias: secretsmanager
+  script:
+    - do your thing
+```
