@@ -1,6 +1,6 @@
 {
   "name": "aws-secretsmanager-emulator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Emulator for AWS Secrets Manager",
   "main": "main/index.js",
   "author": "Patrick Boisen <patrick@skarp.dk>",
