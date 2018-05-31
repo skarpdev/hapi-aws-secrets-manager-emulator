@@ -33,6 +33,19 @@ function fromFiles(config) {
 }
 
 
+function fromEnvironment() {
+    const env = process.env['SECRETS_MANAGER_SECRETS'] || null;
+
+    if (env !== null) {
+        const parsed = JSON.parse(env);
+
+        for (let name in parsed) {
+            secrets.save(new Secret(name, parsed[name]));
+        }
+    }
+}
+
+
 
 /**
  * Pre-loads secrets defined in a given directory
@@ -40,4 +53,5 @@ function fromFiles(config) {
  */
 module.exports = function preloadSecrets(config) {
     fromFiles(config);
+    fromEnvironment();
 };
