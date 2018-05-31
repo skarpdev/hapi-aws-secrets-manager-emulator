@@ -15,6 +15,14 @@ Other features:
 - it can preload secrets based on 1-file-1-secret in a given directory
 
 
+## Configuration
+
+Configuration is done through environment variables.
+
+- `SECRETS_MANAGER_PORT` the port to run on - default is 3000
+- `SECRETS_MANAGER_PRELOAD_DIRECTORY` absolute path of directory from which to read initial set of secrets (see below) - default is empty
+
+
 ## Preloading secrets
 
 As secrets are really just JSON blobs, we thought it would be easiest just to say that 1 file becomes 1 secret.
