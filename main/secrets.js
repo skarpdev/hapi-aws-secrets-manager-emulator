@@ -8,8 +8,9 @@ const secrets = {};
  * @param {Secret} secret 
  */
 module.exports.save = function save(secret) {
-    const key = secret.getLookupKey();
-
+    //const key = secret.getLookupKey();
+    const key = secret.name;
+    console.log("saving secret " + key + "=" + secret);
     secrets[key] = secret;
 };
 

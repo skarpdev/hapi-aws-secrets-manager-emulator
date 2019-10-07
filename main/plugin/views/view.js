@@ -1,6 +1,6 @@
 const Mustache = require('mustache');
 const path = require('path');
-const secrets = require('main/secrets');
+const secrets = require('../../secrets');
 
 /**
  *

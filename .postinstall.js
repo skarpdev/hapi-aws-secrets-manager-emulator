@@ -5,5 +5,5 @@ function createSymlink(source, target){
 
 }
 
-createSymlink('../main', 'node_modules/main');
-createSymlink('../integration-tests', 'node_modules/integration-tests');
+//createSymlink('../main', 'node_modules/main');
+//createSymlink('../integration-tests', 'node_modules/integration-tests');
