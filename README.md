@@ -6,6 +6,8 @@ At the moment, an extremely minimal emulator of [AWS Secrets Manager](https://aw
 
 Supported AWS Secrets Manager features:
 - [GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
+- [UpdatetSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_UpdateSecret.html)
+- [CreateSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html)
 
 Limitations:
 - it ignores secret versions
