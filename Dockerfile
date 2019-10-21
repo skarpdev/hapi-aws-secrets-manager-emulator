@@ -6,7 +6,6 @@ ENV SECRETS_MANAGER_PRELOAD_DIRECTORY=/secrets
 
 ADD package.json .
 ADD yarn.lock .
-ADD .postinstall.js .
 
 RUN yarn install --production
 
