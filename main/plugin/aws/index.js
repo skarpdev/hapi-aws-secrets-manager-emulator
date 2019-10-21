@@ -13,11 +13,17 @@ function getSecretValue(req, h) {
         throw new Error(`There is not secret with ID "${secretId}"`);
     }
 
+    console.log(secret);
+    console.log(secret.getName());
+    console.log(secret.getContent());
+    console.log(secret.getBinary());
+
     return {
         "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
         "SecretString": `${secret.getContent()}`,
+        "SecretBinary": `${secret.getBinary()}`,
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
@@ -27,7 +33,8 @@ function createSecret(req, h) {
 
     const secret = new Secret(
         req.payload.Name,
-        req.payload.SecretString
+        req.payload.SecretString,
+        req.payload.SecretBinary
     );
 
     console.log(req.payload);
@@ -39,6 +46,7 @@ function createSecret(req, h) {
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
         "SecretString": `${secret.getContent()}`,
+        "SecretBinary": `${secret.getBinary()}`,
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
@@ -51,7 +59,8 @@ function updateSecret(req, h) {
 
     const secret = new Secret(
         req.payload.SecretId,
-        req.payload.SecretString
+        req.payload.SecretString,
+        req.payload.SecretBinary
     );
 
     secrets.save(secret);
@@ -61,6 +70,7 @@ function updateSecret(req, h) {
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
         "SecretString": `${secret.getContent()}`,
+        "SecretBinary": `${secret.getBinary()}`,
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
