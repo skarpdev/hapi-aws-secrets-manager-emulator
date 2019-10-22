@@ -18,7 +18,7 @@ function getSecretValue(req, h) {
     console.log(secret.getContent());
     console.log(secret.getBinary());
 
-    return {
+    var result =  {
         "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
@@ -27,6 +27,12 @@ function getSecretValue(req, h) {
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
+
+    if (secret.getBinary() !== 'undefined') {
+        result.SecretBinary = secret.getBinary();
+    }
+
+    return result;
 }
 
 function createSecret(req, h) {
