@@ -30,7 +30,7 @@
     "test": "jest --runInBand"
   },
   "engines": {
-    "node": ">=8.3 =< 12.4.x"
+    "node": ">=12.13 < 13"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./integration-tests/setup.js"
