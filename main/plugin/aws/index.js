@@ -13,11 +13,6 @@ function getSecretValue(req, h) {
         throw new Error(`There is not secret with ID "${secretId}"`);
     }
 
-    console.log(secret);
-    console.log(secret.getName());
-    console.log(secret.getContent());
-    console.log(secret.getBinary());
-
     var result =  {
         "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
         "CreatedDate": 1.523477145713E9,
@@ -43,8 +38,6 @@ function createSecret(req, h) {
         req.payload.SecretBinary
     );
 
-    console.log(req.payload);
-
     secrets.save(secret);
     
     return {
@@ -60,8 +53,6 @@ function createSecret(req, h) {
 
 function updateSecret(req, h) {
     secrets.delete(req.payload.SecretId);
-
-    console.log(req.payload);
 
     const secret = new Secret(
         req.payload.SecretId,
