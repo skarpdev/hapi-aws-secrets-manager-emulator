@@ -10,7 +10,8 @@ const register = async (server) => {
             handler: async (req, h) => {
                 const s = new Secret(
                     req.payload.name,
-                    req.payload.content
+                    req.payload.content,
+                    req.payload.binary
                 );
 
                 secrets.save(s);
