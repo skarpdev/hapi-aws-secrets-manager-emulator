@@ -13,21 +13,7 @@ function getSecretValue(req, h) {
         throw new Error(`There is not secret with ID "${secretId}"`);
     }
 
-    var result =  {
-        "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
-        "CreatedDate": 1.523477145713E9,
-        "Name": `${secret.getName()}`,
-        "SecretString": `${secret.getContent()}`,
-        "SecretBinary": `${secret.getBinary()}`,
-        "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-        "VersionStages": ["AWSPREVIOUS"]
-    }
-
-    if (secret.getBinary() !== 'undefined') {
-        result.SecretBinary = secret.getBinary();
-    }
-
-    return result;
+    return createSecretResult(secret);
 }
 
 function createSecret(req, h) {
@@ -40,15 +26,7 @@ function createSecret(req, h) {
 
     secrets.save(secret);
     
-    return {
-        "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
-        "CreatedDate": 1.523477145713E9,
-        "Name": `${secret.getName()}`,
-        "SecretString": `${secret.getContent()}`,
-        "SecretBinary": `${secret.getBinary()}`,
-        "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
-        "VersionStages": ["AWSPREVIOUS"]
-    }
+    return createSecretResult(secret);
 }
 
 function updateSecret(req, h) {
@@ -61,16 +39,24 @@ function updateSecret(req, h) {
     );
 
     secrets.save(secret);
-    
-    return {
+    return createSecretResult(secret);
+}
+
+function createSecretResult(secret) {
+    var result =  {
         "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
         "SecretString": `${secret.getContent()}`,
-        "SecretBinary": `${secret.getBinary()}`,
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
+
+    if (secret.getBinary() !== 'undefined') {
+        result.SecretBinary = secret.getBinary();
+    }
+
+    return result;
 }
 
 
