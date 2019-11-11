@@ -43,17 +43,17 @@ async function go(config) {
   /**
    * Get our views in
    */
-  await server.register(require('main/plugin/views'));
+  await server.register(require('./plugin/views'));
 
   /**
    * Management stuff
    */
-  await server.register(require('main/plugin/management'));
+  await server.register(require('./plugin/management'));
 
     /**
      * AWS stuff
      */
-    await server.register(require('main/plugin/aws'));
+    await server.register(require('./plugin/aws'));
 
   /**
    * Start and return

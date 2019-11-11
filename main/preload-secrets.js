@@ -1,5 +1,5 @@
-const Secret = require('main/Secret');
-const secrets = require('main/secrets');
+const Secret = require('./Secret');
+const secrets = require('./secrets');
 const fs = require('fs');
 const Path = require('path');
 

@@ -1,5 +1,5 @@
-const Secret = require('main/Secret');
-const secrets = require('main/secrets');
+const Secret = require('../../Secret');
+const secrets = require('../../secrets');
 
 
 const register = async (server) => {
@@ -10,7 +10,8 @@ const register = async (server) => {
             handler: async (req, h) => {
                 const s = new Secret(
                     req.payload.name,
-                    req.payload.content
+                    req.payload.content,
+                    req.payload.binary
                 );
 
                 secrets.save(s);

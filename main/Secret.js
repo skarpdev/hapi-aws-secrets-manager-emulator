@@ -1,8 +1,9 @@
 
 class Secret {
-    constructor(name, content) {
+    constructor(name, content, binary) {
         this.name = name;
         this.content = content;
+        this.binary = binary;
     }
 
     getContent() {
@@ -11,6 +12,14 @@ class Secret {
 
     setContent(value) {
         this.content = value;
+    }
+
+    getBinary() {
+        return this.binary;
+    }
+
+    setBinary(value) {
+        this.binary = value;
     }
 
     getName() {
@@ -25,6 +34,7 @@ class Secret {
         return {
             name: this.name,
             content: this.content,
+            binary: this.binary,
             key: this.getLookupKey()
         }
     }

@@ -9,7 +9,6 @@ const secrets = {};
  */
 module.exports.save = function save(secret) {
     const key = secret.getLookupKey();
-
     secrets[key] = secret;
 };
 

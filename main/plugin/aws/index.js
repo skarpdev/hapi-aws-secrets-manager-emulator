@@ -1,4 +1,5 @@
-const secrets = require('main/secrets');
+const secrets = require('../../secrets');
+const Secret = require('../../Secret');
 
 function getSecretValue(req, h) {
     const secretId = req.payload.SecretId;
@@ -12,14 +13,50 @@ function getSecretValue(req, h) {
         throw new Error(`There is not secret with ID "${secretId}"`);
     }
 
-    return {
+    return createSecretResult(secret);
+}
+
+function createSecret(req, h) {
+
+    const secret = new Secret(
+        req.payload.Name,
+        req.payload.SecretString,
+        req.payload.SecretBinary
+    );
+
+    secrets.save(secret);
+    
+    return createSecretResult(secret);
+}
+
+function updateSecret(req, h) {
+    secrets.delete(req.payload.SecretId);
+
+    const secret = new Secret(
+        req.payload.SecretId,
+        req.payload.SecretString,
+        req.payload.SecretBinary
+    );
+
+    secrets.save(secret);
+    return createSecretResult(secret);
+}
+
+function createSecretResult(secret) {
+    var result =  {
         "ARN": `arn:aws:secretsmanager:us-west-2:123456789012:secret:${secret.getName()}-a1b2c3`,
         "CreatedDate": 1.523477145713E9,
         "Name": `${secret.getName()}`,
-        "SecretString": `${secret.getContent()}\n`,
+        "SecretString": `${secret.getContent()}`,
         "VersionId": "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1",
         "VersionStages": ["AWSPREVIOUS"]
     }
+
+    if (secret.getBinary() !== 'undefined') {
+        result.SecretBinary = secret.getBinary();
+    }
+
+    return result;
 }
 
 
@@ -45,6 +82,10 @@ const register = async (server) => {
                 switch (target.toLowerCase()) {
                     case 'secretsmanager.getsecretvalue':
                         return getSecretValue(req, h);
+                    case 'secretsmanager.createsecret':
+                        return createSecret(req, h);
+                    case 'secretsmanager.updatesecret':
+                        return updateSecret(req, h);
                     default:
                         throw new Error(`Unsupported target ${target}`);
                 }
