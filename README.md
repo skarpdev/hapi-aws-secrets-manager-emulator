@@ -1,5 +1,7 @@
 # AWS Secrets Manager emulator
 
+Note that since this project was made, [LocalStack](https://github.com/localstack/localstack) has added support for secrets manager. That project is likely to better maintained, than this one.
+
 Available on Docker Hub as [skarpdev/aws-secrets-manager-emulator](https://hub.docker.com/r/skarpdev/aws-secrets-manager-emulator/).
 
 At the moment, an extremely minimal emulator of [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/).
