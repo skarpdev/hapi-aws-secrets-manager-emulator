@@ -7,22 +7,22 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "hapi": "^17.5.0",
-    "hapi-pino": "^4.0.4",
-    "hoek": "^5.0.3",
-    "inert": "^5.1.0",
+    "@hapi/hapi": "^20.2.1",
+    "@hapi/hoek": "^9.2.1",
+    "@hapi/inert": "^6.0.4",
+    "@hapi/vision": "^6.1.0",
+    "hapi-pino": "^9.1.0",
     "make-promises-safe": "^1.1.0",
     "mustache": "^2.3.0",
-    "nconf": "^0.10.0",
-    "vision": "^5.3.2"
+    "nconf": "^0.11.3"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-node": "^6.0.1",
+    "eslint": "^8.5.0",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-node": "^11.1.0",
     "hapi-test-utils": "^1.0.0",
     "jest": "^23.0.1",
-    "unexpected": "^10.38.0"
+    "unexpected": "^12.0.3"
   },
   "scripts": {
     "lint": "eslint .",
@@ -30,7 +30,7 @@
     "test": "jest --runInBand"
   },
   "engines": {
-    "node": ">=12.13 < 13"
+    "node": ">=16.13.1 < 17"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./integration-tests/setup.js"
