@@ -24,6 +24,12 @@ async function go(config) {
     plugin: require('hapi-pino'),
     options: {
       logPayload: false,
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          colorize: true
+        }
+      }
     }
   });
 
