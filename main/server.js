@@ -1,6 +1,6 @@
-const Hapi = require('hapi');
-const Vision = require('vision');
-const Inert = require('inert');
+const Hapi = require('@hapi/hapi');
+const Vision = require('@hapi/vision');
+const Inert = require('@hapi/inert');
 const Path = require('path');
 
 /**
@@ -23,8 +23,13 @@ async function go(config) {
   await server.register({
     plugin: require('hapi-pino'),
     options: {
-      prettyPrint: true,
       logPayload: false,
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          colorize: true
+        }
+      }
     }
   });
 
@@ -34,7 +39,7 @@ async function go(config) {
    * Static file serving
    */
   await server.register(Inert);
-  
+
   /**
    * Register view and authentication stack
    */

@@ -1,7 +1,7 @@
 const secrets = require('../../secrets');
 const Secret = require('../../Secret');
 
-function getSecretValue(req, h) {
+function getSecretValue(req/*,  h */) {
     const secretId = req.payload.SecretId;
 
     // TODO do the same validation as AWS
@@ -16,7 +16,7 @@ function getSecretValue(req, h) {
     return createSecretResult(secret);
 }
 
-function createSecret(req, h) {
+function createSecret(req/*, h */) {
 
     const secret = new Secret(
         req.payload.Name,
@@ -25,11 +25,11 @@ function createSecret(req, h) {
     );
 
     secrets.save(secret);
-    
+
     return createSecretResult(secret);
 }
 
-function updateSecret(req, h) {
+function updateSecret(req/*, h*/) {
     secrets.delete(req.payload.SecretId);
 
     const secret = new Secret(
