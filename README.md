@@ -28,6 +28,7 @@ Configuration is done through environment variables.
 - `SECRETS_MANAGER_PORT` the port to run on - **default is 3000**
 - `SECRETS_MANAGER_PRELOAD_DIRECTORY` absolute path of directory from which to read initial set of secrets (see below) - **default is empty**
 - `SECRETS_MANAGER_SECRETS` secrets to preload if you are unable to use volume mounts - **default is empty**
+- `SECRETS_MANAGER_LOG_LEVEL` override log level - **default is 'info'**
 
 
 ## Preloading secrets
