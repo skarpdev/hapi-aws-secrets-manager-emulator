@@ -29,7 +29,8 @@ async function go(config) {
         options: {
           colorize: true
         }
-      }
+      },
+      level: config.LOG_LEVEL
     }
   });
 
